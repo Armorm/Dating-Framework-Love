@@ -74,5 +74,24 @@ function love.draw(dt)
  local font2 = love.graphics.newFont(60)
  drawOutlinedText(Scene.sceneSetup[Scene.currentScene][Scene.currentInfo].name, 420, 755)
 
- 
+ local current = Scene.sceneSetup[Scene.currentScene][Scene.currentInfo]
+
+if current.type == "choice" and current.choices then
+    local startX = 400
+    local startY = 890
+    local colSpacing = 500  -- distance between left/right choices
+    local rowSpacing = 70   -- distance between rows
+    
+    for i, choice in ipairs(current.choices) do
+        local col = (i - 1) % 2
+        local row = math.floor((i - 1) / 2)
+
+        local x = startX + col * colSpacing
+        local y = startY + row * rowSpacing
+
+        love.graphics.printf(choice.choiceName, x, y, 450)
+    end
+ end
 end
+ 
+
